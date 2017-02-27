@@ -1,6 +1,13 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+
+#include "TextBox.h";
+
+using namespace std;
 
 int main(int argc, char* argv[])
 {
@@ -9,7 +16,7 @@ int main(int argc, char* argv[])
 	SDL_Surface *imageSurface = nullptr;
 	SDL_Renderer *renderTarget = nullptr;
 	
-	int width = 1368,
+	int width = 1360,
 		height = 720;
 
 	/* Initialize the video */
@@ -29,35 +36,27 @@ int main(int argc, char* argv[])
 			SDL_SetRenderDrawColor(renderTarget, 0, 0, 0x55, 0x0);
 			if (TTF_Init() < 0)
 				printf("Error");
+		
 
-			SDL_Color color;
-			TTF_Font *font = TTF_OpenFont("SEASRN__.ttf", 54);
-			SDL_Rect textRect;
-			SDL_Surface *textSurface = nullptr;
-			SDL_Texture *textTexture = nullptr;
-
-			color = { 255, 255, 255 };
-			
-
-			textSurface = TTF_RenderText_Solid(font, "Karen Yulissa Beza Lopez", color);
-			textTexture = SDL_CreateTextureFromSurface(renderTarget, textSurface);
-
-			
-			if (textTexture == nullptr)
-				printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
-
-
-			textRect.x = (int)(width - textSurface->w) / 2;
-			textRect.y = (int)(height - textSurface->h) / 2;
-			SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
-			SDL_FreeSurface(textSurface);
-			textSurface = nullptr;
-
+			// Test stuff
+			TextBox tb(renderTarget, 200, 350, 1000, 400);
+			tb.loadFile("in.txt");
+			tb.setFont("SEASRN__.ttf", 30);
+			// Test stuff
 
 			SDL_RenderClear(renderTarget);
-			SDL_RenderCopy(renderTarget, textTexture, nullptr, &textRect);
+			tb.Draw();
 			SDL_RenderPresent(renderTarget);
-			SDL_Delay(5000); // The window will display for 5 seconds
+			SDL_Delay(5000);
+			tb.Clear();
+			tb.loadFile("in2.txt");
+			tb.setFont("SEASRN__.ttf", 30);
+
+			SDL_RenderClear(renderTarget);
+			tb.Draw();
+			SDL_RenderPresent(renderTarget);
+			SDL_Delay(5000);
+
 		}
 	}
 

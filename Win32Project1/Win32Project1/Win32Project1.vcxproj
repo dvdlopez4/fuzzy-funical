@@ -161,9 +161,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TextBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\..\..\..\..\Documents\Visual Studio 2015\Projects\Win32Project2\Win32Project2\SEASRN__.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TextBox.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
