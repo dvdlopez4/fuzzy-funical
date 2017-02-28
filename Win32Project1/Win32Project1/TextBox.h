@@ -5,8 +5,11 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <queue>
 
 using namespace std;
+
+enum state { BEGIN, CREATE_LINE, CREATE_TEXTURE, END };
 
 class TextBox
 {
@@ -38,7 +41,6 @@ private:
 	TTF_Font *font;
 	vector<SDL_Texture*> textures;
 	vector<SDL_Rect> textureRects;
-	vector<string> text;
 	SDL_Surface *surface;
 	SDL_Renderer *renderRef;
 	int width;
@@ -48,6 +50,8 @@ private:
 	int spaceWidth;
 	int skip;
 	SDL_Color color;
+	state State;
+	queue<string> Text;
 
 	void createTextures();
 };

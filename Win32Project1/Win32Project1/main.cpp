@@ -48,15 +48,6 @@ int main(int argc, char* argv[])
 			tb.Draw();
 			SDL_RenderPresent(renderTarget);
 			SDL_Delay(5000);
-			tb.Clear();
-			tb.loadFile("in2.txt");
-			tb.setFont("SEASRN__.ttf", 30);
-
-			SDL_RenderClear(renderTarget);
-			tb.Draw();
-			SDL_RenderPresent(renderTarget);
-			SDL_Delay(5000);
-
 		}
 	}
 
@@ -64,7 +55,7 @@ int main(int argc, char* argv[])
 	SDL_DestroyWindow(window);
 	window = nullptr;
 	SDL_Quit();
-
+	TTF_Quit();
 	std::cin.get();
 	return 0;
 }
