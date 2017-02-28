@@ -31,7 +31,6 @@ int main(int argc, char* argv[])
 			std::cout << "Window creation error: " << SDL_GetError() << std::endl;
 		else
 		{
-			SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 			renderTarget = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			// Window Created
 			SDL_SetRenderDrawColor(renderTarget, 0, 0, 0x55, 0x0);

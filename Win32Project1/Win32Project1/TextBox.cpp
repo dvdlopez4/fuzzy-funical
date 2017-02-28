@@ -102,6 +102,7 @@ void TextBox::setFont(string s, int size)
 {
 	font = TTF_OpenFont(s.c_str(), size);
 	skip = TTF_FontLineSkip(font);
+	TTF_CloseFont(font);
 }
 
 void TextBox::Clear()
