@@ -31,6 +31,7 @@ int main(int argc, char* argv[])
 			std::cout << "Window creation error: " << SDL_GetError() << std::endl;
 		else
 		{
+			SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 			renderTarget = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			// Window Created
 			SDL_SetRenderDrawColor(renderTarget, 0, 0, 0x55, 0x0);
@@ -39,15 +40,17 @@ int main(int argc, char* argv[])
 		
 
 			// Test stuff
-			TextBox tb(renderTarget, 200, 350, 1000, 400);
-			tb.loadFile("in.txt");
-			tb.setFont("SEASRN__.ttf", 30);
+			TextBox tb(renderTarget, width / 8, height * 3 / 5, 800, 200, "SEASRN__.ttf");
+			tb.setColor(20, 150, 130);
+			tb.CreateText("in.txt");
 			// Test stuff
 
-			SDL_RenderClear(renderTarget);
-			tb.Draw();
-			SDL_RenderPresent(renderTarget);
-			SDL_Delay(5000);
+			while (true)
+			{
+				SDL_RenderClear(renderTarget);
+				tb.Draw();
+				SDL_RenderPresent(renderTarget);
+			}
 		}
 	}
 

@@ -1,14 +1,16 @@
 #include "TextBox.h"
 
 
-void TextBox::loadFile(string s)
+void TextBox::CreateText(string inputFile)
 {
-	ifstream in(s.c_str());
+	ifstream in(inputFile.c_str());
 	string word;
 	while (in >> word)
 		Text.push(word);
 	in.close();
+	createTextures();
 }
+
 
 void TextBox::createTextures()
 {
@@ -17,6 +19,20 @@ void TextBox::createTextures()
 	int numOfLines = 0;
 	int currentWidth = 0;
 	State = BEGIN;
+
+	/* Underlying box slightly larger than text area */
+	rect = boxRect;
+	rect.w += 10;
+	rect.h += 10;
+	rect.x -= 10;
+	rect.y -= 10;
+
+	/* Create underlying box for text box */
+	surface = SDL_CreateRGBSurface(0, rect.w, rect.h, 32, 0, 0, 0, 0);
+	SDL_FillRect(surface, nullptr, 0x004444);
+	textures.push_back(SDL_CreateTextureFromSurface(renderRef, surface));
+	textureRects.push_back(rect);
+	rect = { 0, 0, 0, 0 };
 
 	while (State != END)
 	{
@@ -33,8 +49,9 @@ void TextBox::createTextures()
 
 			/* Check if width is less than text box width */
 			TTF_SizeText(font, (line + Text.front() + " ").c_str(), &currentWidth, nullptr);
-			if (currentWidth < (width - x))
+			if (currentWidth < boxRect.w)
 			{
+				/* Remove word from Text vector (no need to hold onto to that info anymore, currently) */
 				line += Text.front() + " ";
 				Text.pop();
 
@@ -54,8 +71,8 @@ void TextBox::createTextures()
 			textures.push_back(SDL_CreateTextureFromSurface(renderRef, surface));
 
 			/* Texture placement */
-			rect.x = x;
-			rect.y = y + skip * numOfLines++;
+			rect.x = boxRect.x;
+			rect.y = boxRect.y + skip * numOfLines++; // numOfLines increments for each new line
 			SDL_QueryTexture(textures.back(), nullptr, nullptr, &rect.w, &rect.h);
 			textureRects.push_back(rect);
 
@@ -77,13 +94,19 @@ void TextBox::createTextures()
 
 void TextBox::Draw()
 {
-	for (int i = 0; i < textures.size(); ++i)
+	for (size_t i = 0; i < textures.size(); ++i)
 		SDL_RenderCopy(renderRef, textures[i], nullptr, &textureRects[i]);
+}
+
+void TextBox::setFont(string s, int size)
+{
+	font = TTF_OpenFont(s.c_str(), size);
+	skip = TTF_FontLineSkip(font);
 }
 
 void TextBox::Clear()
 {
-	for (int i = 0; i < textures.size(); ++i)
+	for (size_t i = 0; i < textures.size(); ++i)
 		SDL_DestroyTexture(textures[i]);
 
 	textures.clear();
