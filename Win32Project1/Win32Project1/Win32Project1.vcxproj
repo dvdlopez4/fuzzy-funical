@@ -97,6 +97,10 @@
       <AdditionalLibraryDirectories>C:\Users\dvdlo_000\Source\Repos\fuzzy-funical\Win32Project1\SDL\SDL2_image-2.0.1\lib\x86;C:\Users\dvdlo_000\Source\Repos\fuzzy-funical\Win32Project1\SDL\SDL2_mixer-2.0.1\lib\x86;C:\Users\dvdlo_000\Source\Repos\fuzzy-funical\Win32Project1\SDL\SDL2_ttf-2.0.14\lib\x86;C:\Users\dvdlo_000\Source\Repos\fuzzy-funical\Win32Project1\SDL\SDL2-2.0.5\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -132,6 +136,10 @@
       <AdditionalLibraryDirectories>C:\Users\dvdlo_000\Source\Repos\fuzzy-funical\Win32Project1\SDL\SDL2_image-2.0.1\lib\x86;C:\Users\dvdlo_000\Source\Repos\fuzzy-funical\Win32Project1\SDL\SDL2_mixer-2.0.1\lib\x86;C:\Users\dvdlo_000\Source\Repos\fuzzy-funical\Win32Project1\SDL\SDL2_ttf-2.0.14\lib\x86;C:\Users\dvdlo_000\Source\Repos\fuzzy-funical\Win32Project1\SDL\SDL2-2.0.5\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -153,6 +161,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TextBox.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\..\..\..\Documents\Visual Studio 2015\Projects\Win32Project2\Win32Project2\SEASRN__.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TextBox.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="SEASRN__.ttf" />
